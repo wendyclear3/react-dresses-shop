@@ -27,17 +27,17 @@ function Home({
 
   return (
     <div className="content p-40">
-      <div className="mb-40 d-flex justify-between align-center">
+      <div className="d-flex align-center justify-between mb-40">
         <h1>
-          {searchValue ? `Поиск по запросу: '${searchValue}'` : 'Все платья'}
+          {searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все платья'}
         </h1>
         <div className="search-block d-flex">
-          <img src="/img/search.svg" alt="search" />
+          <img src="img/search.svg" alt="Search" />
           {searchValue && (
             <img
               onClick={() => setSearchValue('')}
               className="clear cu-p"
-              src="/img/btn-remove.svg"
+              src="img/btn-remove.svg"
               alt="Clear"
             />
           )}
@@ -48,7 +48,6 @@ function Home({
           />
         </div>
       </div>
-
       <div className="d-flex flex-wrap">{renderItems()}</div>
     </div>
   )
