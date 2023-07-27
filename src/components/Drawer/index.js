@@ -19,7 +19,9 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
       setIsLoading(true)
       const { data } = await axios.post(
         'https://64afff88c60b8f941af50a3c.mockapi.io/orders',
-        { items: cartItems }
+        {
+          items: cartItems,
+        }
       )
       setOrderId(data.id)
       setIsOrderComplete(true)
@@ -33,7 +35,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
         await delay(1000)
       }
     } catch (error) {
-      alert('Не удалось создать заказ :(')
+      alert('Ошибка при создании заказа :(')
     }
     setIsLoading(false)
   }
@@ -42,11 +44,11 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
     <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
       <div className={styles.drawer}>
         <h2 className="d-flex justify-between mb-30">
-          Корзина
+          Корзина{' '}
           <img
             onClick={onClose}
             className="cu-p"
-            src="/img/btn-remove.svg"
+            src="img/btn-remove.svg"
             alt="Close"
           />
         </h2>
@@ -64,15 +66,15 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                     className="cartItemImg"
                   ></div>
 
-                  <div className="mr-15">
+                  <div className="mr-15 flex">
                     <p className="mb-5">{obj.title}</p>
                     <b>{obj.price} руб.</b>
                   </div>
                   <img
                     onClick={() => onRemove(obj.id)}
                     className="removeBtn"
-                    src="/img/btn-remove.svg"
-                    alt="remove"
+                    src="img/btn-remove.svg"
+                    alt="Remove"
                   />
                 </div>
               ))}
@@ -82,11 +84,10 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                 <li>
                   <span>Итого:</span>
                   <div></div>
-                  <b>{totalPrice} руб.</b>
+                  <b>{totalPrice} руб. </b>
                 </li>
-
                 <li>
-                  <span>Налог 5%</span>
+                  <span>Налог 5%:</span>
                   <div></div>
                   <b>{Math.round((totalPrice / 100) * 5)} руб.</b>
                 </li>
@@ -96,7 +97,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                 onClick={onClickOrder}
                 className="greenButton"
               >
-                Оформить заказ <img src="/img/arrow.svg" alt="arrow" />
+                Оформить заказ <img src="img/arrow.svg" alt="Arrow" />
               </button>
             </div>
           </div>
@@ -109,9 +110,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                 : 'Добавьте хотя бы одно платье, чтобы сделать заказ'
             }
             image={
-              isOrderComplete
-                ? '/img/complete-order.jpg'
-                : '/img/empty-cart.jpg'
+              isOrderComplete ? 'img/complete-order.jpg' : 'img/empty-cart.jpg'
             }
           />
         )}
